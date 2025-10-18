@@ -36,17 +36,11 @@ pip install -r requirements.txt
 
 ### 4. 設定環境變數
 
-複製範本檔案並設定您的 API key：
-
-```bash
-cp env.example .env
-```
-
-編輯 `.env` 檔案，將 `your_openai_api_key_here` 替換為您的實際 API key：
+新增 `.env` 檔案，將 `your_openai_api_key_here` 替換為您的實際 API key：
 
 ```bash
 # OpenAI API 設定
-OPENAI_API_KEY=sk-your-actual-api-key-here
+OPENAI_API_KEY=your-api-key
 ```
 
 ### 5. 執行程式
@@ -57,7 +51,7 @@ streamlit run app.py
 
 ## 使用方式
 
-1. 確保已按照上述步驟設定 `.env` 檔案
+1. 確保已新增 `.env` 檔案
 2. 執行程式，如果沒有 `.env` 檔案會顯示錯誤訊息
 3. 輸入研究主題（預設為「最新多語言 LLM fine-tuning 方法」）
 4. 調整 Temperature 參數
