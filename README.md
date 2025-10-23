@@ -10,7 +10,7 @@
 
 ## 範例
 
-![Research Agent Demo](demo/research_agent_demo_hq_fast.gif)
+![Research Agent Demo](demo/research_agent_demo_slow_hq.gif)
 
 ## 安裝與執行
 
