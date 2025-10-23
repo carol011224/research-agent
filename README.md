@@ -8,6 +8,10 @@
 - **Researcher**: 從 arXiv 搜尋最新學術論文並分析研究發現
 - **Summarizer**: 基於真實論文資料生成完整的研究報告
 
+## 範例
+
+![Research Agent Demo](demo/research_agent_demo_slow_hq.gif)
+
 ## 安裝與執行
 
 ### 1. 建立虛擬環境
