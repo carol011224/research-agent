@@ -29,7 +29,7 @@ if not api_key:
 # ----------------------
 with st.sidebar:
     topic = st.text_input("Research topic", value="最新多語言 LLM fine-tuning 方法")
-    temp = st.slider("Temperature", 0.0, 1.0, 0.2)
+    # temp = st.slider("Temperature", 0.0, 1.0, 0.2) # 可讓使用者選擇 temperature 參數
     st.markdown("---")
 
 # ----------------------
@@ -148,14 +148,14 @@ def search_arxiv(query, max_results=3, start_offset=0):
 def topic_refiner(topic, api_key):
     prompt = f"""你是一名資深研究助理。針對主題「{topic}」，生成 3~5 個具體、可研究的子問題。
 
-請直接輸出問題清單，每行一個問題，不要包含任何格式符號或 JSON 結構。
+            請直接輸出問題清單，每行一個問題，不要包含任何格式符號或 JSON 結構。
 
-範例輸出格式：
-機器學習中的注意力機制如何工作？
-深度學習在自然語言處理中的應用
-Transformer 架構的優缺點分析
+            範例輸出格式：
+            機器學習中的注意力機制如何工作？
+            深度學習在自然語言處理中的應用
+            Transformer 架構的優缺點分析
 
-請生成關於「{topic}」的具體研究問題："""
+            請生成關於「{topic}」的具體研究問題："""
     
     raw = llm_chat(prompt, api_key)
     
