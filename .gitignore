@@ -45,3 +45,8 @@ Thumbs.db
 
 # Logs
 *.log
+
+# demo file
+demo/research_agent_demo.mov
+demo/research_agent_demo_v2.mov
+demo/research_agent_demo_v2_hq.gif
