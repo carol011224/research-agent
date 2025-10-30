@@ -1,93 +1,171 @@
-# Research Agent
+# AI Research Agent - LangChain 版本
 
-一個基於 Streamlit 的研究代理程式，使用多個 AI Agent 進行序列式研究分析，並從 arXiv 獲取真實的學術論文資料。
+一個基於 **LangChain Agent** 架構的 AI research agent，能夠搜尋真實的學術論文並生成完整的研究報告。
 
-## 功能特色
+![Demo](demo/research_agent_demo.gif)
 
-- **Topic Refiner**: 將研究主題細化為具體的子問題
-- **Researcher**: 從 arXiv 搜尋最新學術論文並分析研究發現
-- **Summarizer**: 基於真實論文資料生成完整的研究報告
+## 🎯 功能特色
 
-## 範例
+### 三個專業 AI Agent 協作
 
-![Research Agent Demo](demo/research_agent_demo_slow_hq.gif)
+1. **🏗️ Topic Refiner Agent**
+   - 將廣泛的研究主題細化為 3-5 個具體、可研究的子問題
+   - 為每個問題生成清晰的說明（clarifier）
+   - 解析和格式化研究問題
 
-## 安裝與執行
+2. **📏 Researcher Agent**
+   - **真實 arXiv 論文搜尋**：搜尋並分析最新的學術論文
+   - 自動過濾重複論文，確保每個問題都有獨特的研究結果
+   - 提取關鍵研究發現、評估可信度和資料品質
+   - 提供論文詳情：標題、作者、摘要、分類、連結
 
-### 1. 建立虛擬環境
+3. **✍️ Summarizer Agent**
+   - 整合所有研究結果生成完整的學術報告
+   - 包含：Abstract、Introduction、Key Findings、Limitations、Future Work
+   - 正確格式化的引用文獻
 
-```bash
-python3 -m venv .venv
-```
+## 🚀 快速開始
 
-### 2. 啟動虛擬環境
-
-**macOS/Linux:**
-```bash
-source .venv/bin/activate
-```
-
-**Windows:**
-```bash
-.venv\Scripts\activate
-```
-
-### 3. 安裝相依套件
+### 1. 安裝依賴
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. 設定環境變數
+### 2. 設定環境變數
 
-新增 `.env` 檔案，將 `your_openai_api_key_here` 替換為您的實際 API key：
-
-```bash
-# OpenAI API 設定
-OPENAI_API_KEY=your-api-key
-```
-
-### 5. 執行程式
+建立 `.env` 檔案：
 
 ```bash
-streamlit run app.py
+OPENAI_API_KEY=your_openai_api_key_here
 ```
 
-## 使用方式
+### 3. 執行應用程式
 
-1. 確保已新增 `.env` 檔案
-2. 執行程式，如果沒有 `.env` 檔案會顯示錯誤訊息
-3. 輸入研究主題（預設為「最新多語言 LLM fine-tuning 方法」）
-4. 調整 Temperature 參數
-5. 點擊「Start Research 🚀」開始研究
+```bash
+streamlit run app_langchain.py
+```
 
-## 工作流程
+## 📊 系統架構
 
-1. **Topic Refiner**: AI 將您的研究主題細化為 3-5 個具體的子問題
-2. **Researcher**: 
-   - 為每個子問題搜尋 arXiv 最新論文（每個問題 2-3 篇）
-   - AI 分析論文摘要和標題，提取研究發現
-   - 評估資料來源的可信度和品質
-3. **Summarizer**: AI 整合所有研究發現，生成完整的研究報告
+### LangChain Agent 工作流程
 
-## 輸出格式
+```
+輸入研究主題
+    ↓
+Topic Refiner Agent
+(細化為具體問題)
+    ↓
+Researcher Agent
+(搜尋 arXiv 論文)
+    ↓
+Summarizer Agent
+(生成完整報告)
+    ↓
+輸出研究報告
+```
 
-程式會生成：
-- 細化的研究問題
-- 基於真實 arXiv 論文的研究發現
-- 論文連結、作者、發布日期等詳細資訊
-- 完整的研究報告（可下載為 .txt 檔案）
-- JSON 格式的完整輸出
+### 真實資料來源
 
-## 資料來源
+- **arXiv API**：即時搜尋最新學術論文
+- **去重**：自動過濾重複論文
+- **結果驗證**：每條發現都有具體論文來源
 
-- **arXiv API**: 免費的學術論文搜尋，無使用限制
-- **OpenAI API**: 用於分析和總結研究資料
+## 🎨 介面特色
 
-## 注意事項
+- **簡潔清晰的問題顯示**：每個問題都有清楚的格式和說明
+- **詳細的論文資訊**：顯示論文標題、作者、摘要、分類和連結
+- **進度指示器**：實時顯示研究進度
+- **可下載報告**：支援文字報告和 JSON 格式下載
 
-- 必須設定 `.env` 檔案並包含有效的 OpenAI API Key
-- 程式會自動從 `.env` 檔案載入 API Key
-- 如果沒有 `.env` 檔案或找不到 API Key，程式會顯示錯誤並停止執行
-- 研究結果基於真實的 arXiv 學術論文，確保資料的可信度
-- 程式會自動處理 API 速率限制，確保穩定運行
+## 📋 使用範例
+
+1. **輸入研究主題**：例如「最新 RAG 的方法」
+2. **點擊「Start Research 🚀」**
+3. **等待 Agent 執行**（約 3-5 分鐘）
+4. **查看結果**：
+   - 細化的研究問題
+   - 每個問題的 arXiv 論文和研究發現
+   - 完整的研究報告
+5. **下載結果**：可下載文字報告或完整 JSON 資料
+
+## 🔧 技術細節
+
+### 核心技術
+
+- **LangChain Agent**：使用 LangChain 架構實現 multi-agent 協作
+- **OpenAI GPT-4o-mini**：作為 LLM 引擎
+- **arXiv API**：真實的學術論文搜尋
+- **Streamlit**：Web 介面
+
+## 📈 研究流程
+
+### 階段 1: Topic Refiner
+- 接收研究主題
+- 生成 3-5 個具體研究問題
+- 為每個問題添加說明
+
+### 階段 2: Researcher
+- 針對每個問題搜尋 arXiv 論文
+- 分析論文內容並提取關鍵發現
+- 評估資料可信度和品質
+
+### 階段 3: Summarizer
+- 整合所有研究結果
+- 生成結構化的學術報告
+- 包含完整的引用格式
+
+## 🎯 輸出內容
+
+### 研究問題
+- 格式化的問題列表
+- 每個問題的詳細說明
+- 可展開查看原始 JSON 輸出
+
+### 研究結果
+- 每個問題的研究發現
+- 真實的 arXiv 論文詳情
+- 可信度和資料品質評估
+- 論文連結和分類
+
+### 最終報告
+- Abstract（摘要）
+- Introduction（引言）
+- Key Findings（主要發現）
+- Limitations（限制）
+- Future Work（未來工作）
+- References（參考文獻）
+
+## ⚙️ 設定
+
+### 預設參數
+
+- **模型**：gpt-4o-mini
+- **Temperature**：0.1（固定）
+- **每題論文數**：最多 3 篇
+- **論文去重**：自動過濾重複論文
+
+## 📝 注意事項
+
+- ⚠️ **API Key 必須設定**：需要有效的 OpenAI API Key
+- ⏱️ **執行時間**：完整研究流程約需 3-5 分鐘
+- 📚 **真實資料**：使用的是真實的 arXiv 論文資料
+- 🔍 **網路連線**：需要網路連線以搜尋 arXiv API
+
+## 🐛 故障排除
+
+### 常見問題
+
+1. **API Key 錯誤**
+   - 確保 `.env` 檔案存在且包含正確的 API Key
+   - 檢查 API Key 是否有效且有足夠額度
+
+2. **arXiv 搜尋失敗**
+   - 檢查網路連線
+   - 確保網路可以訪問 arXiv API
+
+## 🔗 相關資源
+
+- [LangChain 文件](https://python.langchain.com/)
+- [arXiv API 文件](https://arxiv.org/help/api)
+- [Streamlit 文件](https://docs.streamlit.io/)
