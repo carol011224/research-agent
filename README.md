@@ -2,9 +2,9 @@
 
 一個基於 **LangChain Agent** 架構的 AI research agent，能夠搜尋真實的學術論文並生成完整的研究報告。
 
-<video src="demo/research_agent_demo_v2.mov" width="800" controls muted loop playsinline>
+<video src="demo/research_agent_demo_v2.mp4" width="800" controls muted loop playsinline>
   Your browser does not support the video tag.
-  <a href="demo/research_agent_demo_v2.mov">Download the demo video</a>
+  <a href="demo/research_agent_demo_v2.mp4">Download the demo video</a>
 </video>
 
 ## 🎯 功能特色
